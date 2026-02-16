@@ -77,65 +77,59 @@
       100% { transform:translateY(-110vh) rotate(360deg) scale(1); opacity:0; }
     }
 
-/* ── DOG IMAGES ── */
-.dog-image {
-  position: fixed;
-  top: 38%;
-  transform: translateY(-50%);
-  width: 160px;
-  z-index: 150;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
+    /* ── DOG IMAGES ── */
+    .dog-image {
+      position: fixed;
+      top: 38%;
+      transform: translateY(-50%);
+      width: 160px;
+      z-index: 150;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
 
-.dog-image.show {
-  opacity: 1;
-  animation: dogSwing 2s ease-in-out infinite;
-}
+    .dog-image.show {
+      opacity: 1;
+      animation: dogSwing 2s ease-in-out infinite;
+    }
 
-.dog-left  { left: 5%; }
-.dog-right { right: 5%; transform: scaleX(-1); }
+    .dog-left  { left: 5%; }
+    .dog-right { right: 5%; transform: scaleX(-1); }
 
-@keyframes dogSwing {
-  0%, 100% { transform: rotate(-6deg); }
-  50%      { transform: rotate(6deg); }
-}
+    @keyframes dogSwing {
+      0%, 100% { transform: rotate(-6deg); }
+      50%      { transform: rotate(6deg); }
+    }
 
-.dog-right.show {
-  animation: dogSwingRight 2s ease-in-out infinite;
-}
+    .dog-right.show {
+      animation: dogSwingRight 2s ease-in-out infinite;
+    }
 
-@keyframes dogSwingRight {
-  0%, 100% { transform: scaleX(-1) rotate(-6deg); }
-  50%      { transform: scaleX(-1) rotate(6deg); }
-}
+    @keyframes dogSwingRight {
+      0%, 100% { transform: scaleX(-1) rotate(-6deg); }
+      50%      { transform: scaleX(-1) rotate(6deg); }
+    }
 
-/* ── Mobile adjustments: giữ chó nhưng nhỏ + đẩy ra mép + lên cao ── */
-@media (max-width: 768px) {
-  .dog-image {
-    width: 70px !important;          /* nhỏ lại đáng kể */
-    top: 22% !important;             /* đẩy lên cao, nằm ở phần đầu màn hình */
-    transform: translateY(0) !important;  /* bỏ căn giữa dọc để cố định vị trí */
-    opacity: 0.65 !important;        /* mờ nhẹ để chữ hiện rõ hơn */
-  }
+    /* Mobile: giữ chó nhưng nhỏ, đẩy lên cao, sát mép, mờ nhẹ */
+    @media (max-width: 768px) {
+      .dog-image {
+        width: 70px !important;
+        top: 22% !important;
+        transform: translateY(0) !important;
+        opacity: 0.65 !important;
+      }
+      .dog-left  { left: 1% !important; }
+      .dog-right { right: 1% !important; }
+    }
 
-  .dog-left {
-    left: 1% !important;             /* sát mép trái */
-  }
+    @media (max-width: 380px) {
+      .dog-image {
+        width: 55px !important;
+        top: 18% !important;
+      }
+    }
 
-  .dog-right {
-    right: 1% !important;            /* sát mép phải */
-  }
-}
-
-/* Nếu màn hình rất nhỏ (như iPhone SE hoặc tương tự) */
-@media (max-width: 380px) {
-  .dog-image {
-    width: 55px !important;
-    top: 18% !important;
-  }
-}
     /* ── MAIN ── */
     .main {
       position:relative; z-index:10;
@@ -245,17 +239,6 @@
     }
     @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:0.9} }
 
-    /* ── SPARKLES ── */
-    .sp {
-      position:fixed; opacity:0; pointer-events:none;
-      font-size:1.5rem; z-index:50;
-    }
-    @keyframes spPop {
-      0%   { opacity:1; transform:translate(-50%,-50%) scale(0) rotate(0deg); }
-      40%  { opacity:1; transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.5) rotate(20deg); }
-      100% { opacity:0; transform:translate(calc(-50% + var(--dx)*2), calc(-50% + var(--dy)*2 - 20px)) scale(0.4) rotate(40deg); }
-    }
-
     /* ── MODAL ── */
     .overlay {
       position:fixed; inset:0; z-index:100;
@@ -299,16 +282,28 @@
       color:var(--gold3); line-height:1.55; margin:0 0 28px;
     }
 
-    .answers { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-    .ans {
-      padding:14px 16px; border-radius:50px; border:none;
-      font-family:'Quicksand',sans-serif; font-size:0.88rem; font-weight:600;
-      cursor:pointer; transition:all 0.3s;
+    .answers {
+      display: flex;
+      justify-content: center;
     }
-    .ans.yes { background:linear-gradient(135deg, #f5c518 0%, #e8a000 100%); color:#5a0a0a; }
-    .ans.no { background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.28); border:1px solid rgba(255,255,255,0.1); }
-    .ans.no.vanish { animation:vanishBtn 0.45s ease-out forwards; }
-    @keyframes vanishBtn { 100% { opacity:0; transform:scale(0); pointer-events:none; } }
+
+    .ans {
+      padding:16px 32px;
+      border-radius:50px;
+      border:none;
+      font-family:'Quicksand',sans-serif;
+      font-size:1rem;
+      font-weight:600;
+      cursor:pointer;
+      transition:all 0.3s;
+      min-width:220px;
+      text-align:center;
+    }
+
+    .ans.yes {
+      background:linear-gradient(135deg, #f5c518 0%, #e8a000 100%);
+      color:#5a0a0a;
+    }
 
     .result { display:none; flex-direction:column; align-items:center; gap:14px; }
     .result.show { display:flex; }
@@ -319,8 +314,6 @@
 
     .cf { position:fixed; opacity:0; z-index:200; animation:cfFall linear forwards; pointer-events:none; }
     @keyframes cfFall { 0%{opacity:1;transform:translateY(-10px) rotate(0deg)} 100%{opacity:0;transform:translateY(105vh) rotate(700deg)} }
-
-   
   </style>
 </head>
 <body>
@@ -366,18 +359,16 @@
     <div id="qScreen">
       <div class="modal-sun">🧧</div>
       <div class="modal-q">
-        Nhân dịp Tết Bính Ngọ,
-        em làm người yêu anh nha<br>
+        Nhân dịp Tết Bính Ngọ,<br>em làm người yêu anh nha
       </div>
       <div class="answers">
         <button class="ans yes" onclick="pick('yes')">Em đồng ý 🧧</button>
-        <button class="ans no" id="noBtn" onclick="handleNo()">Không đồng ý</button>
       </div>
     </div>
 
     <div class="result" id="rScreen">
       <div class="res-emoji" id="rEmoji"></div>
-      <div class="res-text"  id="rText"></div>
+      <div class="res-text" id="rText"></div>
       <div class="res-sub">💕</div>
       <button class="back-btn" onclick="reset()">↩ &nbsp;Trở về</button>
     </div>
@@ -387,7 +378,6 @@
 <script>
 const FORMSPREE_URL = "https://formspree.io/f/xreaqpla";
 let isOpened = false;
-let noVanishing = false;
 
 // Tạo hạt rơi
 const pbg = document.getElementById('particlesBg');
@@ -407,22 +397,10 @@ function openLixi() {
   document.getElementById('lixiScene').classList.add('opened');
   document.getElementById('hint').style.display = 'none';
 
-  // Hiển thị 2 con chó
   document.getElementById('dogLeft').classList.add('show');
   document.getElementById('dogRight').classList.add('show');
 
   setTimeout(() => document.getElementById('overlay').classList.add('show'), 650);
-}
-
-function handleNo() {
-  if (noVanishing) return;
-  noVanishing = true;
-  const btn = document.getElementById('noBtn');
-  btn.classList.add('vanish');
-  setTimeout(() => {
-    btn.style.display = 'none';
-    document.querySelector('.ans.yes').style.gridColumn = '1 / -1';
-  }, 450);
 }
 
 function pick(choice) {
@@ -436,7 +414,7 @@ function pick(choice) {
   fetch(FORMSPREE_URL, {
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ 'Lựa chọn': choice === 'yes' ? 'Em đồng ý 🧧' : 'Không đồng ý' })
+    body: JSON.stringify({ 'Lựa chọn': 'Em đồng ý 🧧' })
   });
 }
 
@@ -455,14 +433,9 @@ function reset() {
   document.getElementById('overlay').classList.remove('show');
   document.getElementById('qScreen').style.display = '';
   document.getElementById('rScreen').classList.remove('show');
-  const nb = document.getElementById('noBtn');
-  nb.style.display = ''; nb.classList.remove('vanish');
-  noVanishing = false;
-  document.querySelector('.ans.yes').style.gridColumn = '';
   isOpened = false;
   document.getElementById('lixiScene').classList.remove('opened');
   document.getElementById('hint').style.display = '';
-  // Ẩn lại 2 con chó
   document.getElementById('dogLeft').classList.remove('show');
   document.getElementById('dogRight').classList.remove('show');
 }
