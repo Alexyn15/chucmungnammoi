@@ -80,10 +80,10 @@
 /* ── DOG IMAGES ── */
 .dog-image {
   position: fixed;
-  top: 38%;                   /* điều chỉnh giá trị này nếu muốn cao/thấp hơn */
-  transform: translateY(-50%); /* giúp căn giữa theo chiều dọc */
+  top: 38%;
+  transform: translateY(-50%);
   width: 160px;
-  z-index: 150;               /* cao hơn overlay (100) để không bị tối/mờ */
+  z-index: 150;
   opacity: 0;
   pointer-events: none;
   transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -111,17 +111,31 @@
   50%      { transform: scaleX(-1) rotate(6deg); }
 }
 
+/* ── Mobile adjustments: giữ chó nhưng nhỏ + đẩy ra mép + lên cao ── */
 @media (max-width: 768px) {
   .dog-image {
-    width: 80px;             /* nhỏ lại nhiều */
-    top: 35%;                /* đẩy lên cao hơn để tránh vùng giữa modal */
-    opacity: 0.8;            /* hơi mờ nhẹ, không lấn át chữ */
+    width: 70px !important;          /* nhỏ lại đáng kể */
+    top: 22% !important;             /* đẩy lên cao, nằm ở phần đầu màn hình */
+    transform: translateY(0) !important;  /* bỏ căn giữa dọc để cố định vị trí */
+    opacity: 0.65 !important;        /* mờ nhẹ để chữ hiện rõ hơn */
   }
-  
-  .dog-left  { left: 2%; }
-  .dog-right { right: 2%; }
+
+  .dog-left {
+    left: 1% !important;             /* sát mép trái */
+  }
+
+  .dog-right {
+    right: 1% !important;            /* sát mép phải */
+  }
 }
 
+/* Nếu màn hình rất nhỏ (như iPhone SE hoặc tương tự) */
+@media (max-width: 380px) {
+  .dog-image {
+    width: 55px !important;
+    top: 18% !important;
+  }
+}
     /* ── MAIN ── */
     .main {
       position:relative; z-index:10;
@@ -306,9 +320,7 @@
     .cf { position:fixed; opacity:0; z-index:200; animation:cfFall linear forwards; pointer-events:none; }
     @keyframes cfFall { 0%{opacity:1;transform:translateY(-10px) rotate(0deg)} 100%{opacity:0;transform:translateY(105vh) rotate(700deg)} }
 
-    @media (max-width:480px) {
-      .dog-image { width: 110px; }
-    }
+   
   </style>
 </head>
 <body>
