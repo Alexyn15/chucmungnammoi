@@ -111,11 +111,15 @@
   50%      { transform: scaleX(-1) rotate(6deg); }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .dog-image {
-    width: 110px;
-    top: 42%;               /* có thể cần cao hơn chút trên điện thoại */
+    width: 80px;             /* nhỏ lại nhiều */
+    top: 35%;                /* đẩy lên cao hơn để tránh vùng giữa modal */
+    opacity: 0.8;            /* hơi mờ nhẹ, không lấn át chữ */
   }
+  
+  .dog-left  { left: 2%; }
+  .dog-right { right: 2%; }
 }
 
     /* ── MAIN ── */
